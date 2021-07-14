@@ -1,6 +1,8 @@
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
+
+
 const data = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
@@ -86,6 +88,14 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Joe Hernandez - The Lambda School Journey', 
+    date: 'July 12th, 2021',
+    firstParagraph: ' Extremely excited to keep learning more about the full stack machine!!!!',
+    secondParagraph: 'Learning a lot every lecture',
+    thirdParagraph: 'Blessed and greatful to have such talented staff at Lambda!!'
+
   }
 ];
 
@@ -114,3 +124,52 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParagraph, open }) {
+
+
+
+  let article = document.createElement('div')
+  let h2Title = document.createElement('h2')
+  let articleDate = document.createElement('p')
+  let firstP = document.createElement('p')
+  let secondP = document.createElement('p')
+  let thirdP = document.createElement('p')
+  let span = document.createElement('span')
+
+article.classList.add('article')
+articleDate.classList.add('date')
+span.classList.add('expandButton')
+
+  article.appendChild(h2Title)
+  article.appendChild(articleDate)
+  article.appendChild(firstP)
+  article.appendChild(secondP)
+  article.appendChild(thirdP)
+  article.appendChild(span)
+
+  h2Title.textContent = title
+  articleDate.textContent = date
+  firstP.textContent = firstParagraph
+  secondP.textContent = secondParagraph
+  thirdP.textContent = thirdParagraph
+  span.textContent  = '\u25bc'
+
+span.addEventListener('click', (event) => {
+  article.classList.toggle('article-open')
+})
+
+
+  return article
+}
+
+
+let articles = document.querySelector('.articles')
+console.log(articles)
+
+data.forEach(dataObj => {
+  const newArticle = articleMaker(dataObj)
+  articles.appendChild(newArticle)
+})
+
+console.log(articleMaker)
